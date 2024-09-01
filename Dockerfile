@@ -17,4 +17,6 @@ COPY . /app/
 EXPOSE 5001
 
 # Define the command to run the web application
-CMD ["npm", "start"]
+#CMD ["npm", "start"]
+#CMD ["npm", "run", "pm2"]
+ENTRYPOINT [ "npm", "start" ]

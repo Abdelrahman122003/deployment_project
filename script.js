@@ -13,8 +13,12 @@ app.get("/", async (req, res) => {
   res.render("index.ejs");
 });
 app.get("/front", async (req, res) => {
-  const users = (await axios.get("http://localhost:5001/users")).data;
-  res.json(users);
+  try {
+    const users = (await axios.get("http://localhost:5001/users")).data;
+    return res.json(users);
+  } catch (error) {
+    return res.json({ error: "Users endpoint is not open yet." });
+  }
 });
 app.listen(port, () =>
   console.log("> Server is up and running on port : " + port)
