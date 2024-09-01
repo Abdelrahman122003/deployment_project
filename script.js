@@ -5,14 +5,8 @@ const app = express()
 const port = process.env.PORT || 5001
 
 
-type User = {
-  id: number,
-  name: string,
-  email: string,
-  password: string
-}
 
-const users: User[] = [
+const users = [
   {
     id: 1,
     name: 'John Doe',

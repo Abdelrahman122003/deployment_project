@@ -3,8 +3,9 @@
 	"version": "1.0.0",
 	"main": "script.js",
 	"scripts": {
-		"start": "bun run script.ts"
+		"start": "node ."
 	},
+	"type": "module",
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
