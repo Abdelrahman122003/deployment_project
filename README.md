@@ -11,7 +11,7 @@ The main purpose is to ensure that the frontend can successfully connect to the 
 - Backend Branch: Used for developing the backend.
 
 
-## Initial Testing Steps(First Step)
+## Testing the Images I Built
 
 1. Create Dockerfiles: After developing the frontend and backend applications, create a Dockerfile for each.
 
@@ -43,14 +43,14 @@ The main purpose is to ensure that the frontend can successfully connect to the 
 docker run --name=backend -p 5001:5001 backend-image
 ```
 
-<p style="text-align: center;">
+<p align = "center">
   <img src="./images/run_backend_application.png" width="400" alt="Description of image">
 </p>
 
 **When you access it in the browse**
 
 
-  <p style="text-align: center;">
+  <p align = "center">
   <img src="./images/get_users.png" width="400">
   </p>
 
@@ -77,7 +77,7 @@ docker run -p 5000:5000 frontend-image
 
 the main pupose is frontend reach to backend that everything we make it untill now is ensure that frontend is worked and ensure that backend is worked when acess it.
 
-## Second Step
+### Pushing Images to Docker Hub
 
 **Push these images to Docker Hub**
 
@@ -108,34 +108,80 @@ the main pupose is frontend reach to backend that everything we make it untill n
     docker push abdelrahmansayed/backend-app:v1.0
     ```
 
-## deployment with kubernetes
-go to the kube branch to see the yml files that i used it now
+## Deployment with Kubernetes
 
-### backend app
+Go to the kube branch to view the YAML files that I used.
 
-   - `Create Backend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
-      ```s
-      sudo kubectl apply -f deployment.yml
-      ```
-      <p align = "center">
-      <img src="./images/events-for-backend-deployment.png" width="400">
-      </p>
+### First, Let’s Remember Why Kubernetes
 
-   - `Create Backend Service`: Expose the application to users.
+- Automated Deployment and Scaling: Kubernetes automates the deployment, scaling, and management of containerized applications, ensuring high availability and efficient resource use.
+
+- Self-Healing: It automatically replaces failed containers, restarts them, and reschedules them to maintain the desired state of your applications.
+
+- Service Discovery and Load Balancing: Kubernetes provides built-in service discovery and load balancing to distribute traffic across containers, improving application reliability and performance.
+
+- Resource Management: Kubernetes efficiently manages resources such as CPU and memory, optimizing utilization and cost.
+
+- Multi-Cloud and Hybrid Deployments: Kubernetes supports running applications across multiple clouds and on-premises environments, providing flexibility and avoiding vendor lock-in.
+- 
+### backend deployment
+
+`Create Backend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
+    ```s
+    sudo kubectl apply -f deployment.yml
+    ```
+    <p align = "center">
+    <img src="./images/events-for-backend-deployment.png" width="400">
+    </p>
 
 ### frontend app
-   - `Create Frontend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
-       ```s
-      sudo kubectl apply -f deployment.yml
-      ```
+`Create Frontend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
+  ```s
+sudo kubectl apply -f deployment.yml
+```
 
-       <p align = "center">
-      <img src="./images/events-for-frontend-deployment.png" width="400">
-      </p>
-   - `Create Frontend Service`: Expose the application to users.
-  
-our pods 
+  <p align = "center">
+<img src="./images/events-for-frontend-deployment.png" width="400">
+</p>
+
+### View the Pods and Show Their IPs
 
  <p align = "center">
       <img src="./images/get-pods.png" width="400">
+      </p>
+
+### Accessing the Application Using the Pod IP and Internal Port
+ 
+ Check the internal port that the application is using by inspecting the Pod's container specification:
+
+ ```s
+ kubectl describe pod <pod-name>
+ ```
+
+ <p align = "center">
+      <img src="./images/acess-backend-using-pod-ip.png" width="400">
+      </p>
+
+Until now, there have been no issues, and you can communicate between the frontend and backend applications without any problems.
+
+However, let's imagine that a Pod fails and is replaced by a new one, which has a different IP address. If you rely on the IP address to connect between the frontend and backend, you will need to update the IP addresses in your configuration whenever a Pod is replaced.
+
+This approach can lead to problems with managing and maintaining IP addresses, especially if Pods frequently restart or are rescheduled.
+
+So, how can we solve this problem? Using Services
+
+## Backend Service
+
+`Create Backend Service`: Expose the application to users.
+
+ <p align = "center">
+      <img src="./images/access-backend-service.png" width="400">
+      </p>
+
+## Backend Service
+
+`Create Frontend Service`: Expose the application to users.
+
+ <p align = "center">
+      <img src="./images/acess-frontend-service.png" width="400">
       </p>
