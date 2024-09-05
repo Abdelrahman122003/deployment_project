@@ -50,9 +50,9 @@ docker run --name=backend -p 5001:5001 backend-image
 **When you access it in the browse**
 
 
-<p style="text-align: center;">
-<img src="./images/get_users.png" width="400">
-</p>
+  <p style="text-align: center;">
+  <img src="./images/get_users.png" width="400">
+  </p>
 
 
 ### Frontend Application 
@@ -63,14 +63,14 @@ docker run --name=backend -p 5001:5001 backend-image
 docker run -p 5000:5000 frontend-image
 ```
 
-<p style="text-align: center;">
+<p align = "center">
   <img src="./images/acess_frontend_application.png" width="400" alt="Description of image">
 </p>
 
 **When you access it in the browse**
 
 
-<p style="text-align: center;">
+<p align = "center">
 <img src="./images/command_to_acess_frontend_app.png" width="400">
 </p>
 
@@ -117,7 +117,7 @@ go to the kube branch to see the yml files that i used it now
       ```s
       sudo kubectl apply -f deployment.yml
       ```
-      <p style="text-align: center;">
+      <p align = "center">
       <img src="./images/events-for-backend-deployment.png" width="400">
       </p>
 
@@ -129,13 +129,13 @@ go to the kube branch to see the yml files that i used it now
       sudo kubectl apply -f deployment.yml
       ```
 
-       <p style="text-align: center;">
+       <p align = "center">
       <img src="./images/events-for-frontend-deployment.png" width="400">
       </p>
    - `Create Frontend Service`: Expose the application to users.
   
 our pods 
 
- <p style="text-align: center;">
+ <p align = "center">
       <img src="./images/get-pods.png" width="400">
       </p>
