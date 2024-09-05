@@ -1,0 +1,12 @@
+# To test if the container is working, access its endpoints.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend-pod
+  namespace: app
+spec:
+  containers:
+  - name: backend
+    image: abdelrahmansayed/backend-app:v1.0
+    ports:
+    - containerPort: 5001

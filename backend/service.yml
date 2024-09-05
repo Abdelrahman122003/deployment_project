@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: app # Specify the namespace if needed
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 9901           # The port that the service exposes
+      targetPort: 5001   # The port on the container that the service should forward traffic to
+  type: ClusterIP       # The type of service. Can also be NodePort or LoadBalancer depending on your needs

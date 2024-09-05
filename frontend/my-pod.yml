@@ -1,0 +1,12 @@
+# To test if the container is working, access its endpoints.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend-pod
+  namespace: app # Specify the namespace if needed
+spec:
+  containers:
+  - name: fronted
+    image: abdelrahmansayed/my-app:v1.0 
+    ports:
+    - containerPort: 5000
