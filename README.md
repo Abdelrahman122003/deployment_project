@@ -108,3 +108,34 @@ the main pupose is frontend reach to backend that everything we make it untill n
     docker push abdelrahmansayed/backend-app:v1.0
     ```
 
+## deployment with kubernetes
+go to the kube branch to see the yml files that i used it now
+
+### backend app
+
+   - `Create Backend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
+      ```s
+      sudo kubectl apply -f deployment.yml
+      ```
+      <p style="text-align: center;">
+      <img src="./images/events-for-backend-deployment.png" width="400">
+      </p>
+
+   - `Create Backend Service`: Expose the application to users.
+
+### frontend app
+   - `Create Frontend Deployment`: Ensure that deployment.yml is in the same directory as where you run the command or specify the path to the file.
+       ```s
+      sudo kubectl apply -f deployment.yml
+      ```
+
+       <p style="text-align: center;">
+      <img src="./images/events-for-frontend-deployment.png" width="400">
+      </p>
+   - `Create Frontend Service`: Expose the application to users.
+  
+our pods 
+
+ <p style="text-align: center;">
+      <img src="./images/get-pods.png" width="400">
+      </p>
