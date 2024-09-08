@@ -14,7 +14,7 @@ app.get("/", async (req, res) => {
 });
 app.get("/front", async (req, res) => {
   try {
-    const users = (await axios.get("http://backend-service:5001/users")).data;
+    const users = (await axios.get("http://backend-service:9901/users")).data;
     return res.json(users);
   } catch (error) {
     return res.json({ error: "Users endpoint is not open yet." });
