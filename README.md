@@ -170,7 +170,7 @@ This approach can lead to problems with managing and maintaining IP addresses, e
 
 So, how can we solve this problem? Using Services
 
-## Backend Service
+### Backend Service
 
 `Create Backend Service`: Expose the application to users.
 
@@ -178,10 +178,56 @@ So, how can we solve this problem? Using Services
       <img src="./images/access-backend-service.png" width="400">
       </p>
 
-## Backend Service
+### Backend Service
 
 `Create Frontend Service`: Expose the application to users.
 
  <p align = "center">
       <img src="./images/acess-frontend-service.png" width="400">
       </p>
+
+### We will now access the backend from the frontend.
+
+**Issue**
+
+For the first frontend image, I set the endpoint to connect to the backend using `http://localhost:5001/users`, but this is incorrect. I want to change it to use the IP of the backend service, not the pod created by the deployment. However, the IP address of the service is unknown at build time; it is only assigned after the service is created. How can I specify this IP in the application before building the image?
+
+**Solution**
+
+This version clarifies that the challenge is specifying a service IP address in the frontend application before the service is created and the IP address is known.
+
+To solve this problem, instead of using an IP address, you should use the Kubernetes DNS name for the backend service. This way, you don’t need to guess or hard-code the IP.
+
+For example, if your backend service is named `backend-service` and you know the `port` number to use, specify the endpoint in your frontend code like this:
+```js
+"http://backend-service:9901/users"
+```
+
+Kubernetes will automatically resolve the service name to the correct IP address internally.
+
+
+**Here are the steps to access the backend from the frontend:**
+
+1. Update the frontend code, specifically script.js.
+
+2. Rebuild your frontend application into a new image.
+
+3. Update the frontend deployment to use the new image.
+
+4. Reapply the frontend deployment using the following command:
+
+  ```s
+  sudo kubectl apply -f path/deployment.yaml
+  ```
+  To verify if the deployment has been updated, use this command:
+  
+  ```s
+  sudo kubectl get deployment frontend-deployment -o json | jq .spec
+  ```
+  
+  <p align="center"> <img src="./images/update-frontend-deployment.png" width="400"> </p>
+
+
+**Let's try this after the update:**
+
+<p align="center"> <img src="./images/access-backend-from-frontend.png" width="400"> </p>
