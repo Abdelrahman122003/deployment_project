@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: abdelrahmansayed/my-app:v1.0 # Replace with your actual image
+        image: abdelrahmansayed/frontend-app:v2.0 # Replace with your actual image
         ports:
         - containerPort: 5000
